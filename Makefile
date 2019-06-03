@@ -17,4 +17,7 @@ clean:
 vendor:
 	@dep ensure
 
-.PHONY: run test format clean vendor
+bundle:
+	@git bundle create backend-exercise.bundle HEAD master
+
+.PHONY: run test format clean vendor bundle

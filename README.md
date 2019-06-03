@@ -19,3 +19,9 @@ make test
 ```bash
 make run
 ```
+
+## Bundling
+
+```bash
+make bundle
+```
