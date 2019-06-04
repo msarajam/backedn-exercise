@@ -26,20 +26,12 @@
 
 
 [[constraint]]
-  name = "github.com/gin-gonic/gin"
-  version = "1.4.0"
-
-[[constraint]]
   name = "github.com/satori/go.uuid"
   version = "1.2.0"
 
 [[constraint]]
   name = "gopkg.in/go-playground/validator.v8"
   version = "8.18.2"
-
-[[constraint]]
-  name = "gopkg.in/yaml.v2"
-  version = "2.2.2"
 
 [prune]
   go-tests = true
