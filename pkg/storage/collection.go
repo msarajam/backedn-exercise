@@ -16,18 +16,16 @@ func NewCollection() *Collection {
 }
 
 func (c *Collection) Insert(a models.App) string {
-	id := uuid.NewV4().String()
-	a.ID = id
-	c.data[id] = a
-	return id
+	a.ID = uuid.NewV4().String()
+	c.data[a.ID] = a
+	return a.ID
 }
 
 func (c *Collection) Fetch(id string) (models.App, error) {
-	a, ok := c.data[id]
-	if !ok {
-		return models.App{}, NotFound
+	if a, ok := c.data[id]; ok {
+		return a, nil
 	}
-	return a, nil
+	return models.App{}, NotFound
 }
 
 func (c *Collection) All() []models.App {
@@ -41,19 +39,19 @@ func (c *Collection) All() []models.App {
 }
 
 func (c *Collection) Update(a models.App) error {
-	_, err := c.Fetch(a.ID)
-	if err != nil {
+	if _, err := c.Fetch(a.ID); err != nil {
 		return err
 	}
+
 	c.data[a.ID] = a
 	return nil
 }
 
 func (c *Collection) Remove(id string) error {
-	_, err := c.Fetch(id)
-	if err != nil {
+	if _, err := c.Fetch(id); err != nil {
 		return err
 	}
+
 	delete(c.data, id)
 	return nil
 }

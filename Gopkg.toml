@@ -24,15 +24,6 @@
 #   go-tests = true
 #   unused-packages = true
 
-
-[[constraint]]
-  name = "github.com/satori/go.uuid"
-  version = "1.2.0"
-
-[[constraint]]
-  name = "gopkg.in/go-playground/validator.v8"
-  version = "8.18.2"
-
 [prune]
   go-tests = true
   unused-packages = true
