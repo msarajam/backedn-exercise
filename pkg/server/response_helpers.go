@@ -9,9 +9,6 @@ import (
 )
 
 func NotFound() core.ResponseWriter {
-	r := responses.NewResponse()
-	r.SetStatus(http.StatusText(http.StatusNotFound))
-
 	return func(w http.ResponseWriter) {
 		w.WriteHeader(http.StatusNotFound)
 	}
@@ -19,7 +16,6 @@ func NotFound() core.ResponseWriter {
 
 func BadRequest(errs []string) core.ResponseWriter {
 	r := responses.NewResponse()
-	r.SetStatus(http.StatusText(http.StatusBadRequest))
 	r.SetErrors(errs)
 
 	parsed, err := json.Marshal(r)
@@ -39,17 +35,12 @@ func BadRequest(errs []string) core.ResponseWriter {
 func InternalServerError(err error) core.ResponseWriter {
 	log.Println(err)
 
-	r := responses.NewResponse()
-	r.SetStatus(http.StatusText(http.StatusBadRequest))
-
 	return func(w http.ResponseWriter) {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
 }
 
 func OK(r core.Response) core.ResponseWriter {
-	r.SetStatus(http.StatusText(http.StatusOK))
-
 	parsed, err := json.Marshal(r)
 	if err != nil {
 		return InternalServerError(err)
@@ -65,8 +56,6 @@ func OK(r core.Response) core.ResponseWriter {
 }
 
 func Created(r core.Response) core.ResponseWriter {
-	r.SetStatus(http.StatusText(http.StatusCreated))
-
 	parsed, err := json.Marshal(r)
 	if err != nil {
 		return InternalServerError(err)

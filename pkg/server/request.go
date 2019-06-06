@@ -7,25 +7,25 @@ import (
 	"net/http"
 )
 
-type request struct {
+type Request struct {
 	body        []byte
 	httpRequest *http.Request
 	pathParams  map[string]string
 }
 
-func NewRequest(r *http.Request) *request {
-	return &request{
+func NewRequest(r *http.Request) *Request {
+	return &Request{
 		httpRequest: r,
 		pathParams:  mux.Vars(r),
 	}
 }
 
-func (r *request) PathParam(key string) (string, bool) {
+func (r *Request) PathParam(key string) (string, bool) {
 	v, ok := r.pathParams[key]
 	return v, ok
 }
 
-func (r *request) Body() ([]byte, error) {
+func (r *Request) Body() ([]byte, error) {
 	if r.body == nil {
 		raw, err := ioutil.ReadAll(r.httpRequest.Body)
 		if err != nil {
@@ -36,7 +36,7 @@ func (r *request) Body() ([]byte, error) {
 	return r.body, nil
 }
 
-func (r *request) JSON(target interface{}) error {
+func (r *Request) JSON(target interface{}) error {
 	raw, err := r.Body()
 	if err != nil {
 		return err

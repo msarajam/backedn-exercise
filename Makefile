@@ -11,6 +11,9 @@ test: vendor
 format:
 	@gofmt -l -s -w $(PKGS)
 
+lint:
+	@golangci-lint run --enable-all -D goimports
+
 clean:
 	@rm -rf vendor
 

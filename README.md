@@ -6,6 +6,8 @@
     - https://golang.org/
 - Dep v0.5.3
     - https://github.com/golang/dep/releases
+- GolangCI-Lint
+    - https://github.com/golangci/golangci-lint    
 - make
 
 ## Testing

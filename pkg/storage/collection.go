@@ -25,7 +25,7 @@ func (c *Collection) Fetch(id string) (models.App, error) {
 	if a, ok := c.data[id]; ok {
 		return a, nil
 	}
-	return models.App{}, NotFound
+	return models.App{}, ErrNotFound
 }
 
 func (c *Collection) All() []models.App {

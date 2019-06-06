@@ -29,6 +29,5 @@ type Server interface {
 }
 
 type Response interface {
-	SetStatus(string)
 	SetErrors([]string)
 }
