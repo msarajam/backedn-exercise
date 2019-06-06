@@ -2,7 +2,7 @@ package server
 
 import (
 	"github.com/gorilla/mux"
-	"github.com/upbound/backend-exercise/pkg/core"
+	"github.com/upbound/backend-exercise/pkg/server/core"
 	"github.com/upbound/backend-exercise/pkg/server/middleware"
 	"net/http"
 	"time"
@@ -17,6 +17,7 @@ type Server struct {
 func NewServer(listenAddress, mediaType string) *Server {
 	r := mux.NewRouter()
 	r.Use(middleware.ResponseContentType(mediaType))
+	r.NotFoundHandler = notFoundHandler(mediaType)
 	r.MethodNotAllowedHandler = methodNotAllowedHandler(mediaType)
 
 	return &Server{

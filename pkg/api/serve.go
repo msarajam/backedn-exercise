@@ -2,8 +2,8 @@ package api
 
 import (
 	"github.com/upbound/backend-exercise/pkg/api/apps"
-	"github.com/upbound/backend-exercise/pkg/core"
 	"github.com/upbound/backend-exercise/pkg/server"
+	"github.com/upbound/backend-exercise/pkg/server/core"
 	"github.com/upbound/backend-exercise/pkg/storage"
 	"gopkg.in/go-playground/validator.v8"
 )

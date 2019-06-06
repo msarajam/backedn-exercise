@@ -1,13 +1,13 @@
 package models
 
 type App struct {
-	ID          string       `yaml:"id"`
-	Title       string       `yaml:"title" validate:"required"`
-	Version     string       `yaml:"version" validate:"required"`
-	Maintainers []Maintainer `yaml:"maintainers" validate:"required,dive"`
-	Company     string       `yaml:"company" validate:"required"`
-	Website     string       `yaml:"website" validate:"required"`
-	Source      string       `yaml:"source" validate:"required"`
-	License     string       `yaml:"license" validate:"required"`
-	Description string       `yaml:"description" validate:"required"`
+	ID          string       `json:"id"`
+	Title       string       `json:"title" validate:"required"`
+	Version     string       `json:"version" validate:"required"`
+	Maintainers []Maintainer `json:"maintainers" validate:"required,dive"`
+	Company     string       `json:"company" validate:"required"`
+	Website     string       `json:"website" validate:"required"`
+	Source      string       `json:"source" validate:"required"`
+	License     string       `json:"license" validate:"required"`
+	Description string       `json:"description" validate:"required"`
 }

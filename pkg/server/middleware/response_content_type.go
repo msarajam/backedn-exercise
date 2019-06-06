@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"github.com/upbound/backend-exercise/pkg/core"
+	"github.com/upbound/backend-exercise/pkg/server/core"
 	"net/http"
 )
 
