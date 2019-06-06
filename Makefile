@@ -23,4 +23,4 @@ vendor:
 bundle:
 	@git bundle create backend-exercise.bundle HEAD master
 
-.PHONY: run test format clean vendor bundle
+.PHONY: run test format lint clean vendor bundle
