@@ -27,31 +27,3 @@ func (c *Collection) Fetch(id string) (models.App, error) {
 	}
 	return models.App{}, ErrNotFound
 }
-
-func (c *Collection) All() []models.App {
-	apps := make([]models.App, len(c.data))
-	i := 0
-	for _, app := range c.data {
-		apps[i] = app
-		i++
-	}
-	return apps
-}
-
-func (c *Collection) Update(a models.App) error {
-	if _, err := c.Fetch(a.ID); err != nil {
-		return err
-	}
-
-	c.data[a.ID] = a
-	return nil
-}
-
-func (c *Collection) Remove(id string) error {
-	if _, err := c.Fetch(id); err != nil {
-		return err
-	}
-
-	delete(c.data, id)
-	return nil
-}

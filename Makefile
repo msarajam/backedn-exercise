@@ -12,7 +12,7 @@ format:
 	@gofmt -l -s -w $(PKGS)
 
 lint:
-	@golangci-lint run --enable-all -D goimports
+	@golangci-lint run
 
 clean:
 	@rm -rf vendor
@@ -20,7 +20,10 @@ clean:
 vendor:
 	@dep ensure
 
+generate: vendor
+	@go generate $(EXPANDED_PKGS)
+
 bundle:
 	@git bundle create backend-exercise.bundle HEAD master
 
-.PHONY: run test format lint clean vendor bundle
+.PHONY: run test format lint clean vendor generate bundle
