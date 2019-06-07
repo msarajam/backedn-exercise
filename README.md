@@ -31,6 +31,8 @@ Here is an example of a valid "app" in JSON format:
 
 You have been tasked with extending this project by adding one or more features.
 
+When you are done run `make bundle` and send us the generated file `backend-exercise.bundle`.
+
  
 ## Features
 
