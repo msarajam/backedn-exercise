@@ -27,28 +27,49 @@ func (r *Response) Data(key string, value interface{}) *Response {
 }
 
 func (r *Response) Writer(w http.ResponseWriter) {
-	// If there is no data, just write the header and bail out
+	// Write the header first (important!)
+	r.writeHeader(w)
+
+	// If there is no data we are done here
 	if len(r.data) == 0 {
-		w.WriteHeader(r.statusCode)
 		return
 	}
 
+	// Write the body
+	r.writeBody(w, r.marshal())
+}
+
+func (r *Response) writeHeader(w http.ResponseWriter) {
+	w.Header().Set(core.HeaderContentType, r.mediaType)
+	w.Header().Set(core.HeaderXContentTypeOptions, core.NoSniff)
+	w.WriteHeader(r.statusCode)
+}
+
+func (r *Response) writeBody(w http.ResponseWriter, body []byte) {
+	if _, err := w.Write(body); err != nil {
+		log.Println(err)
+	}
+}
+
+// marshal the data to the appropriate media type
+func (r *Response) marshal() []byte {
 	var body []byte
 
-	// Marshal the data to the appropriate media type
 	switch r.mediaType {
 	case core.MediaTypeJSON:
-		parsed, err := json.Marshal(r.data)
-		if err != nil {
-			panic(err)
-		}
-		body = parsed
+		body = r.marshalJSON()
 	default:
 		panic("unsupported media type: " + r.mediaType)
 	}
 
-	w.WriteHeader(r.statusCode)
-	if _, err := w.Write(body); err != nil {
-		log.Println(err)
+	return body
+}
+
+// marshal the data to JSON
+func (r *Response) marshalJSON() []byte {
+	parsed, err := json.Marshal(r.data)
+	if err != nil {
+		panic(err)
 	}
+	return parsed
 }

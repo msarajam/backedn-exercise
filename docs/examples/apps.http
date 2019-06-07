@@ -72,7 +72,7 @@ Content-Type: application/json
 }
 
 ### Get an app
-GET http://localhost:8080/apps/9422a295-f370-4423-b8c2-7128b2b8200e
+GET http://localhost:8080/apps/5e4e3574-cf22-4f3f-b2c4-49a2be699142
 
 ###
 

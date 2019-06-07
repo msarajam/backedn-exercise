@@ -3,7 +3,6 @@ package webber
 import (
 	"github.com/gorilla/mux"
 	"github.com/upbound/backend-exercise/pkg/webber/core"
-	"github.com/upbound/backend-exercise/pkg/webber/middleware"
 	"net/http"
 	"time"
 )
@@ -16,7 +15,6 @@ type Server struct {
 
 func NewServer(listenAddress, mediaType string) *Server {
 	r := mux.NewRouter()
-	r.Use(middleware.ResponseContentType(mediaType))
 	r.NotFoundHandler = notFoundHandler(mediaType)
 	r.MethodNotAllowedHandler = methodNotAllowedHandler(mediaType)
 
