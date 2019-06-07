@@ -109,6 +109,7 @@
     "github.com/golang/mock/gomock",
     "github.com/gorilla/mux",
     "github.com/onsi/gomega",
+    "github.com/onsi/gomega/types",
     "github.com/satori/go.uuid",
     "gopkg.in/go-playground/validator.v8",
   ]
