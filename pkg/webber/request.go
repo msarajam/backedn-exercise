@@ -1,4 +1,4 @@
-package server
+package webber
 
 import (
 	"encoding/json"
@@ -18,6 +18,10 @@ func NewRequest(r *http.Request) *Request {
 		httpRequest: r,
 		pathParams:  mux.Vars(r),
 	}
+}
+
+func (r *Request) Header(key string) string {
+	return r.httpRequest.Header.Get(key)
 }
 
 func (r *Request) PathParam(key string) (string, bool) {

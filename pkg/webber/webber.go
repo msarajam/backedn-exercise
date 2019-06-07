@@ -1,7 +1,7 @@
-package server
+package webber
 
 import (
-	"github.com/upbound/backend-exercise/pkg/server/core"
+	"github.com/upbound/backend-exercise/pkg/webber/core"
 	"net/http"
 )
 

@@ -1,9 +1,9 @@
-package server
+package webber
 
 import (
 	"github.com/gorilla/mux"
-	"github.com/upbound/backend-exercise/pkg/server/core"
-	"github.com/upbound/backend-exercise/pkg/server/middleware"
+	"github.com/upbound/backend-exercise/pkg/webber/core"
+	"github.com/upbound/backend-exercise/pkg/webber/middleware"
 	"net/http"
 	"time"
 )

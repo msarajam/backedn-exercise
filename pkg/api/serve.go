@@ -1,14 +1,14 @@
 package api
 
 import (
-	"github.com/upbound/backend-exercise/pkg/server"
-	"github.com/upbound/backend-exercise/pkg/server/core"
 	"github.com/upbound/backend-exercise/pkg/storage"
+	"github.com/upbound/backend-exercise/pkg/webber"
+	"github.com/upbound/backend-exercise/pkg/webber/core"
 	"gopkg.in/go-playground/validator.v8"
 )
 
 func Serve(listenAddress string, c *storage.Collection, v *validator.Validate) error {
-	s := server.NewServer(listenAddress, core.MediaTypeJSON)
+	s := webber.NewServer(listenAddress, core.MediaTypeJSON)
 	apps := newAppsController(c, v)
 
 	s.POST("/apps", apps.Create)
