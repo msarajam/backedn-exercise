@@ -33,7 +33,10 @@ You have been tasked with extending this project by adding one or more features.
 
 When you are done run `make bundle` and send us the generated file `backend-exercise.bundle`.
 
- 
+## Advice
+
+This exercise is an opportunity to show off your passion and the craftsmanship of your solution. Optimize your solution for quality and reliability. If you feel your solution is missing a cool feature and you have time, have fun and add it. Make the solution your own, and show off your skills.
+
 ## Features
 
 #### YAML
@@ -42,12 +45,12 @@ When you are done run `make bundle` and send us the generated file `backend-exer
 
 #### Search
 
-- Add a new RESTful server endpoint for searching stored "apps".
+- An endpoint to search "apps" and retrieve a list that matches the query parameters.
+- We expect you to write the search functionality from scratch.
 
 #### Rate limiting
 
 - Add per-request rate limiting. 
-
 
 ## The base project
 
