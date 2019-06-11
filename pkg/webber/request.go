@@ -3,12 +3,10 @@ package webber
 import (
 	"encoding/json"
 	"github.com/gorilla/mux"
-	"io/ioutil"
 	"net/http"
 )
 
 type BasicRequest struct {
-	body        []byte
 	httpRequest *http.Request
 	pathParams  map[string]string
 }
@@ -29,21 +27,6 @@ func (r *BasicRequest) PathParam(key string) (string, bool) {
 	return v, ok
 }
 
-func (r *BasicRequest) Body() ([]byte, error) {
-	if r.body == nil {
-		raw, err := ioutil.ReadAll(r.httpRequest.Body)
-		if err != nil {
-			return nil, err
-		}
-		r.body = raw
-	}
-	return r.body, nil
-}
-
 func (r *BasicRequest) JSON(target interface{}) error {
-	raw, err := r.Body()
-	if err != nil {
-		return err
-	}
-	return json.Unmarshal(raw, target)
+	return json.NewDecoder(r.httpRequest.Body).Decode(target)
 }
