@@ -76,20 +76,26 @@ Please do not hesitate to reach out to your Upbound recruiting contacts if you h
 - GoMock and `mockgen`
     - https://github.com/golang/mock        
 
-### Running
+### Run
 
 ```bash
 make run
 ```
 
-### Testing
+### Test
 
 ```bash
 make test
 ```
 
-### Linting
+### Lint
 
 ```bash
 make lint
+```
+
+### Bundle
+
+```bash
+make bundle
 ```
