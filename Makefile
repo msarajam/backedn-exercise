@@ -24,6 +24,6 @@ generate: vendor
 	@go generate $(EXPANDED_PKGS)
 
 bundle:
-	@git bundle create backend-exercise.bundle HEAD master
+	@git bundle create backend-exercise_completed.bundle HEAD master
 
 .PHONY: run test format lint clean vendor generate bundle

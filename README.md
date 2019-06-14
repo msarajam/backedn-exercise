@@ -46,7 +46,7 @@ This exercise is an opportunity to show off your passion and the craftsmanship o
 #### "B"
 
 - Add an endpoint to search "apps" and retrieve a list that matches the query parameters.
-- Search functionality must be written from scratch.
+    - Search functionality must be written from scratch.
 
 #### "C"
 
@@ -56,7 +56,7 @@ This exercise is an opportunity to show off your passion and the craftsmanship o
 
 1. Commit your changes.
 2. Run `make bundle`.
-3. Upload `backed-exercise.bundle` to the Google Drive folder that you were invited to by Upbound.
+3. Upload `backed-exercise_completed.bundle` to the Google Drive folder that you were invited to by Upbound.
 
 ## Questions?
 
