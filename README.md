@@ -39,18 +39,28 @@ This exercise is an opportunity to show off your passion and the craftsmanship o
 
 ## Features
 
-#### YAML
+#### "A"
 
 - Add the ability to submit and retrieve "apps" in YAML format while retaining JSON support.
 
-#### Search
+#### "B"
 
-- An endpoint to search "apps" and retrieve a list that matches the query parameters.
-- We expect you to write the search functionality from scratch.
+- Add an endpoint to search "apps" and retrieve a list that matches the query parameters.
+- Search functionality must be written from scratch.
 
-#### Rate limiting
+#### "C"
 
 - Add per-request rate limiting. 
+
+## Submitting finished exercise
+
+1. Commit your changes.
+2. Run `make bundle`.
+3. Upload `backed-exercise.bundle` to the Google Drive folder that you were invited to by Upbound.
+
+## Questions?
+
+Please do not hesitate to reach out to your Upbound recruiting contacts if you have any questions.
 
 ## The base project
 
@@ -78,3 +88,8 @@ make run
 make test
 ```
 
+### Linting
+
+```bash
+make lint
+```
