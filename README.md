@@ -31,12 +31,6 @@ Here is an example of a valid "app" in JSON format:
 
 You have been tasked with extending this project by adding one or more features.
 
-When you are done run `make bundle` and send us the generated file `backend-exercise.bundle`.
-
-## Advice
-
-This exercise is an opportunity to show off your passion and the craftsmanship of your solution. Optimize your solution for quality and reliability. If you feel your solution is missing a cool feature and you have time, have fun and add it. Make the solution your own, and show off your skills.
-
 ## Features
 
 #### "A"
@@ -57,6 +51,10 @@ This exercise is an opportunity to show off your passion and the craftsmanship o
 1. Commit your changes.
 2. Run `make bundle`.
 3. Upload `backed-exercise_completed.bundle` to the Google Drive folder that you were invited to by Upbound.
+
+## Advice
+
+This exercise is an opportunity to show off your passion and the craftsmanship of your solution. Optimize your solution for quality and reliability. If you feel your solution is missing a cool feature and you have time, have fun and add it. Make the solution your own, and show off your skills.
 
 ## Questions?
 
