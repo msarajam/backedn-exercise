@@ -2,8 +2,11 @@ package webber
 
 import (
 	"encoding/json"
-	"github.com/gorilla/mux"
+	"fmt"
 	"net/http"
+
+	"github.com/gorilla/mux"
+	"gopkg.in/yaml.v2"
 )
 
 type BasicRequest struct {
@@ -28,5 +31,14 @@ func (r *BasicRequest) PathParam(key string) (string, bool) {
 }
 
 func (r *BasicRequest) JSON(target interface{}) error {
-	return json.NewDecoder(r.httpRequest.Body).Decode(target)
+	err := json.NewDecoder(r.httpRequest.Body).Decode(target)
+	fmt.Println("in JSON err :", err)
+	return err
+}
+
+func (r *BasicRequest) YAML(target interface{}) error {
+	err := yaml.NewDecoder(r.httpRequest.Body).Decode(target)
+	/*TODO*/
+	fmt.Println("in YAML err :", err)
+	return nil
 }

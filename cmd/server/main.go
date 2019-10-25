@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	listenAddress := ":8080"
+	listenAddress := "localhost:8080"
 	collection := storage.NewCollection()
 	validate := validator.New(&validator.Config{
 		TagName:      "validate",

@@ -1,10 +1,11 @@
 package webber
 
 import (
-	"github.com/gorilla/mux"
-	"github.com/upbound/backend-exercise/pkg/webber/core"
 	"net/http"
 	"time"
+
+	"github.com/gorilla/mux"
+	"github.com/upbound/backend-exercise/pkg/webber/core"
 )
 
 type Server struct {

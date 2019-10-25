@@ -1,7 +1,9 @@
 package storage
 
 import (
-	"github.com/satori/go.uuid"
+	"fmt"
+
+	uuid "github.com/satori/go.uuid"
 	"github.com/upbound/backend-exercise/pkg/models"
 )
 
@@ -22,6 +24,7 @@ func (c *Collection) Insert(a models.App) string {
 }
 
 func (c *Collection) Fetch(id string) (models.App, error) {
+	fmt.Println("in Fetch : ", c.data)
 	if a, ok := c.data[id]; ok {
 		return a, nil
 	}
