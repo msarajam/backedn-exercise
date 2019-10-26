@@ -1,8 +1,6 @@
 package api
 
 import (
-	"fmt"
-
 	"github.com/upbound/backend-exercise/pkg/storage"
 	"github.com/upbound/backend-exercise/pkg/webber"
 	"github.com/upbound/backend-exercise/pkg/webber/core"
@@ -13,10 +11,9 @@ func Serve(listenAddress string, c *storage.Collection, v *validator.Validate) e
 	s := webber.NewServer(listenAddress, core.MediaTypeJSON)
 	apps := newAppsController(c, v)
 
-	fmt.Println("in Server")
 	s.POST("/apps", apps.Create)
-	s.GET("/apps/{id}", apps.Fetch)
+	s.GET("/apps/json/{id}", apps.Fetch)
+	s.GET("/apps/yaml/{id}", apps.Fetch)
 
-	fmt.Println("going to Server")
 	return s.Serve()
 }

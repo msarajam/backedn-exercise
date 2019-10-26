@@ -32,25 +32,21 @@ func newAppsController(c *storage.Collection, v *validator.Validate) appsControl
 
 // Fetch gets a single app from storage and returns it
 func (c appsController) Fetch(req core.Request) core.ResponseWriter {
-	fmt.Println("in GET", 1)
+	fmt.Println("IN FETCH ------")
+
 	id, ok := req.PathParam(pathParamID)
 	if !ok {
 		panic("did not receive required path parameter " + pathParamID)
 	}
 
-	fmt.Println("in GET", 2)
 	app, err := c.collection.Fetch(id)
 	if err != nil {
-
-		fmt.Println("in GET", 3, err)
 		if err == storage.ErrNotFound {
 			return NewResponse(http.StatusNotFound, core.MediaTypeJSON).Writer
 		}
 		log.Println(err)
 		return NewResponse(http.StatusInternalServerError, core.MediaTypeJSON).Writer
 	}
-
-	fmt.Println("in GET", "last")
 	return NewResponse(http.StatusOK, core.MediaTypeJSON).Data(responseKeyApp, app).Writer
 }
 
@@ -61,7 +57,6 @@ func (c appsController) Create(req core.Request) core.ResponseWriter {
 		fmt.Println(err)
 		return NewResponse(http.StatusBadRequest, core.MediaTypeJSON).Data(responseKeyErrors, errorBadBody).Writer
 	}
-	fmt.Println("TEST TEST : ", app.Company)
 	ok, messages, err := app.Validate(c.validate)
 	if err != nil {
 		log.Println(err)
@@ -73,6 +68,5 @@ func (c appsController) Create(req core.Request) core.ResponseWriter {
 	}
 
 	app.ID = c.collection.Insert(app)
-
 	return NewResponse(http.StatusCreated, core.MediaTypeJSON).Data(responseKeyApp, app).Writer
 }

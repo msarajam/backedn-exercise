@@ -24,7 +24,7 @@ func (c *Collection) Insert(a models.App) string {
 }
 
 func (c *Collection) Fetch(id string) (models.App, error) {
-	fmt.Println("in Fetch : ", c.data)
+	fmt.Println("in Fetch : ", c.data[id])
 	if a, ok := c.data[id]; ok {
 		return a, nil
 	}
