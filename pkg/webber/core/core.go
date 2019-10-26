@@ -7,6 +7,7 @@ const (
 	HeaderXContentTypeOptions = "X-Content-Type-Options"
 	NoSniff                   = "nosniff"
 	MediaTypeJSON             = "application/json"
+	MediaTypeYAML             = "application/x-yaml"
 	MethodGet                 = "GET"
 	MethodPost                = "POST"
 )

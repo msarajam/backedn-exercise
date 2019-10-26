@@ -3,6 +3,7 @@ module github.com/upbound/backend-exercise
 go 1.13
 
 require (
+	github.com/ghodss/yaml v1.0.0
 	github.com/golang/mock v1.3.1-0.20190508161146-9fa652df1129
 	github.com/gorilla/mux v1.7.2
 	github.com/onsi/gomega v1.5.0

@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"github.com/ghodss/yaml"
 	"github.com/upbound/backend-exercise/pkg/webber/core"
 	"log"
 	"net/http"
@@ -29,12 +30,10 @@ func (r *Response) Data(key string, value interface{}) *Response {
 func (r *Response) Writer(w http.ResponseWriter) {
 	// Write the header first (important!)
 	r.writeHeader(w)
-
 	// If there is no data we are done here
 	if len(r.data) == 0 {
 		return
 	}
-
 	// Write the body
 	r.writeBody(w, r.marshal())
 }
@@ -54,20 +53,29 @@ func (r *Response) writeBody(w http.ResponseWriter, body []byte) {
 // marshal the data to the appropriate media type
 func (r *Response) marshal() []byte {
 	var body []byte
-
 	switch r.mediaType {
 	case core.MediaTypeJSON:
+		body = r.marshalJSON()
+	case core.MediaTypeYAML:
 		body = r.marshalJSON()
 	default:
 		panic("unsupported media type: " + r.mediaType)
 	}
-
 	return body
 }
 
 // marshal the data to JSON
 func (r *Response) marshalJSON() []byte {
 	parsed, err := json.Marshal(r.data)
+	if err != nil {
+		panic(err)
+	}
+	return parsed
+}
+
+// marshal the data to YAML
+func (r *Response) marshalYaml() []byte {
+	parsed, err := yaml.Marshal(r.data)
 	if err != nil {
 		panic(err)
 	}

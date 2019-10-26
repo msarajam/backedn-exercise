@@ -3,12 +3,10 @@ package webber
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"github.com/gorilla/mux"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"net/http"
-	"strings"
 )
 
 type BasicRequest struct {
@@ -28,10 +26,6 @@ func (r *BasicRequest) Header(key string) string {
 }
 
 func (r *BasicRequest) PathParam(key string) (string, bool) {
-
-	if strings.ContainsAny("/yaml/", r.httpRequest.RequestURI) {
-
-	}
 	v, ok := r.pathParams[key]
 	return v, ok
 }
@@ -54,12 +48,11 @@ func (r *BasicRequest) Initialize(target interface{}) error {
 	if err = jsonCheck(b, target); err == nil {
 		return nil
 	}
-	fmt.Println(err)
 
 	//check the yaml format
 	if err = yamlCheck(b, target); err == nil {
 		return nil
 	}
-	fmt.Println(err)
+
 	return errors.New("the requested data is not valid")
 }
