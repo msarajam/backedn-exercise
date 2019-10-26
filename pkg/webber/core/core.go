@@ -17,7 +17,6 @@ type Handler func(r Request) ResponseWriter
 
 type Request interface {
 	PathParam(key string) (string, bool)
-	JSON(target interface{}) error
-	YAML(target interface{}) error
+	Initialize(target interface{}) error
 	Header(key string) string
 }

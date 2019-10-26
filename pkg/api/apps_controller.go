@@ -57,20 +57,12 @@ func (c appsController) Fetch(req core.Request) core.ResponseWriter {
 // Create adds an app to storage and returns it with its unique identifier
 func (c appsController) Create(req core.Request) core.ResponseWriter {
 	app := models.App{}
-	jsonType := true
-	if err := req.JSON(&app); err != nil {
-		jsonType = false
+	if err := req.Initialize(&app); err != nil {
+		fmt.Println(err)
+		return NewResponse(http.StatusBadRequest, core.MediaTypeJSON).Data(responseKeyErrors, errorBadBody).Writer
 	}
-	if !jsonType {
-		fmt.Println(jsonType)
-		if err := req.YAML(&app); err != nil {
-			fmt.Println("Got an error in yaml")
-			return NewResponse(http.StatusBadRequest, core.MediaTypeJSON).Data(responseKeyErrors, errorBadBody).Writer
-		}
-	}
-	fmt.Println("HERERERERE")
+	fmt.Println("TEST TEST : ", app.Company)
 	ok, messages, err := app.Validate(c.validate)
-	fmt.Println("HERE", ok, "\n", messages, "\n", err)
 	if err != nil {
 		log.Println(err)
 		return NewResponse(http.StatusInternalServerError, core.MediaTypeJSON).Writer

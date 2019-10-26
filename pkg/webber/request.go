@@ -3,10 +3,10 @@ package webber
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
-
 	"github.com/gorilla/mux"
 	"gopkg.in/yaml.v2"
+	"io/ioutil"
+	"net/http"
 )
 
 type BasicRequest struct {
@@ -30,15 +30,28 @@ func (r *BasicRequest) PathParam(key string) (string, bool) {
 	return v, ok
 }
 
-func (r *BasicRequest) JSON(target interface{}) error {
-	err := json.NewDecoder(r.httpRequest.Body).Decode(target)
-	fmt.Println("in JSON err :", err)
-	return err
+func jsonCheck(b []byte, target interface{}) error {
+	return json.Unmarshal([]byte(b), target)
 }
 
-func (r *BasicRequest) YAML(target interface{}) error {
-	err := yaml.NewDecoder(r.httpRequest.Body).Decode(target)
-	/*TODO*/
-	fmt.Println("in YAML err :", err)
+func yamlCheck(b []byte, target interface{}) error {
+	return yaml.Unmarshal([]byte(b), target)
+}
+
+func (r *BasicRequest) Initialize(target interface{}) error {
+	b, err := ioutil.ReadAll(r.httpRequest.Body)
+	if err != nil {
+		return err
+	}
+	fmt.Println("JSON  :", string(b))
+	if err := jsonCheck(b, target); err != nil {
+		fmt.Println("Not JSON")
+		//return err
+	}
+	fmt.Println("YAML  :", string(b))
+	if err := yamlCheck(b, target); err != nil {
+		fmt.Println("Not YAML")
+		return err
+	}
 	return nil
 }

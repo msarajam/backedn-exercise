@@ -1,17 +1,1 @@
---- 
-company: "Random Inc."
-description: |-
-    ### Interesting Title
-    Some application content, and description
-license: Apache-2.0
-maintainers: 
-  - 
-    email: firstmaintainer@hotmail.com
-    name: "firstmaintainer app1"
-  - 
-    email: secondmaintainer@gmail.com
-    name: "secondmaintainer app1"
-source: "https://github.com/random/repo"
-title: "Valid App 1"
-version: "0.0.1"
-website: "https://website.com"
+{  "title": "Valid App 1",  "version": "0.0.1",  "maintainers": [    {      "name": "firstmaintainer app1",      "email": "firstmaintainer@hotmail.com"    },    {      "name": "secondmaintainer app1",      "email": "secondmaintainer@gmail.com"    }  ],  "company": "Random Inc.",  "website": "https://website.com",  "source": "https://github.com/random/repo",  "license": "Apache-2.0",  "description": "### Interesting Title\nSome application content, and description\n"}

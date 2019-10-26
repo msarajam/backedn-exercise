@@ -21,11 +21,9 @@ type App struct {
 
 // Validate the app - returns valid, validation messages, error
 func (a App) Validate(v *validator.Validate) (bool, []string, error) {
-	fmt.Println("in Validation", v)
 	fmt.Println("in Validation App.Title", a.Title)
 	if err := v.Struct(a); err != nil {
 		fields, ok := err.(validator.ValidationErrors)
-		fmt.Println("Fields", fields)
 		if !ok {
 			return false, nil, errors.New("unable to convert error to type ValidationErrors")
 		}
