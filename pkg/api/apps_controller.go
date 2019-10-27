@@ -1,6 +1,8 @@
 package api
 
 import (
+	"fmt"
+	"golang.org/x/time/rate"
 	"log"
 	"net/http"
 
@@ -17,6 +19,11 @@ const (
 	errorBadBody      = "invalid request body"
 )
 
+var(
+	// operation user per connection
+	limiter = rate.NewLimiter(1, 1)
+)
+
 type appsController struct {
 	collection *storage.Collection
 	validate   *validator.Validate
@@ -31,6 +38,10 @@ func newAppsController(c *storage.Collection, v *validator.Validate) appsControl
 
 // Fetch gets a single app from storage and returns it
 func (c appsController) Fetch(req core.Request) core.ResponseWriter {
+	if limiter.Allow() == false {
+		fmt.Println("RateLimit")
+		return NewResponse(http.StatusTooManyRequests, core.MediaTypeJSON).Writer
+	}
 	id, ok := req.PathParam(pathParamID)
 	if !ok {
 		panic("did not receive required path parameter " + pathParamID)
@@ -51,6 +62,10 @@ func (c appsController) Fetch(req core.Request) core.ResponseWriter {
 
 // Search gets multiple app from storage and returns it
 func (c appsController) Search(req core.Request) core.ResponseWriter {
+	if limiter.Allow() == false {
+		fmt.Println("RateLimit")
+		return NewResponse(http.StatusTooManyRequests, core.MediaTypeJSON).Writer
+	}
 	id, ok := req.PathParam(pathParamID)
 	if !ok {
 		panic("did not receive required path parameter " + pathParamID)
@@ -68,6 +83,10 @@ func (c appsController) Search(req core.Request) core.ResponseWriter {
 
 // Create adds an app to storage and returns it with its unique identifier
 func (c appsController) Create(req core.Request) core.ResponseWriter {
+	if limiter.Allow() == false {
+		fmt.Println("RateLimit")
+		return NewResponse(http.StatusTooManyRequests, core.MediaTypeJSON).Writer
+	}
 	app := models.App{}
 	if err := req.Initialize(&app); err != nil {
 		return NewResponse(http.StatusBadRequest, core.MediaTypeJSON).Data(responseKeyErrors, errorBadBody).Writer
