@@ -20,8 +20,7 @@ const (
 
 var (
 	// 1 operation per each connection
-	limiter       = rate.NewLimiter(1, 1)
-	requestedType = core.MediaTypeJSON
+	limiter = rate.NewLimiter(1, 1)
 )
 
 type appsController struct {

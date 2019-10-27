@@ -19,7 +19,6 @@ clean:
 
 vendor:
 	@export Go111MODULE=On
-	@go mod init
 	@go mod tidy
 	@go mod vendor
 
