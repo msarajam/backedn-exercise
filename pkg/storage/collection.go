@@ -49,7 +49,7 @@ func (c *Collection) Search(searchParameter string) ([]models.App, error) {
 				modelApp = append(modelApp, v)
 			}
 		case "maintainers":
-			modelApp = Maintainers(v, sParameter, modelApp)
+			modelApp = maintainers(v, sParameter, modelApp)
 		case "company":
 			if strings.Contains(strings.ToLower(v.Company), sParameter) {
 				modelApp = append(modelApp, v)
@@ -78,7 +78,7 @@ func (c *Collection) Search(searchParameter string) ([]models.App, error) {
 	return modelApp, nil
 }
 
-func Maintainers(v models.App, sParameter string, modelApp []models.App) []models.App {
+func maintainers(v models.App, sParameter string, modelApp []models.App) []models.App {
 	for _, vm := range v.Maintainers {
 		if strings.Contains(strings.ToLower(vm.Email), sParameter) {
 			modelApp = append(modelApp, v)
