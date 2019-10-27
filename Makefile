@@ -18,7 +18,10 @@ clean:
 	@rm -rf vendor
 
 vendor:
-	@dep ensure
+	@export Go111MODULE=On
+	@go mod init
+	@go mod tidy
+	@go mod vendor
 
 generate: vendor
 	@go generate $(EXPANDED_PKGS)
