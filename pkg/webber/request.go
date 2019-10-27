@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"github.com/gorilla/mux"
+	"github.com/upbound/backend-exercise/pkg/webber/core"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"net/http"
@@ -29,9 +30,16 @@ func (r *BasicRequest) Header(key string) string {
 }
 
 // PathParam is getting the request msg
-func (r *BasicRequest) PathParam(key string) (string, bool) {
+func (r *BasicRequest) PathParam(key string) (string, string, bool) {
+	msgType := ""
+	switch r.httpRequest.RequestURI[:len("/apps/yaml/")] {
+	case "/apps/yaml/":
+		msgType = core.MediaTypeYAML
+	default:
+		msgType = core.MediaTypeJSON
+	}
 	v, ok := r.pathParams[key]
-	return v, ok
+	return msgType, v, ok
 }
 
 func jsonCheck(b []byte, target interface{}) error {

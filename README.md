@@ -1,8 +1,3 @@
-TODO
-add Add yaml instruction
-add Get yaml instruction
-add Search instruction
-
 # backend-exercise
 
 This project will serve as the basis for your coding exercise. It is a simple web service
@@ -102,3 +97,65 @@ make lint
 ```bash
 make bundle
 ```
+
+
+### Testing the Application 
+##### Send json msg :
+```
+curl --data '{
+"title":"Valid App 1",
+"version":"0.0.1",
+"maintainers":[
+   {
+      "name":"firstmaintainer app1",
+      "email":"firstmaintainer@hotmail.com"
+   },
+   {
+      "name":"secondmaintainer app1",
+      "email":"secondmaintainer@gmail.com"
+   }
+],
+"company":"Random Inc.",
+"website":"https://website.com",
+"source":"https://github.com/random/repo",
+"license":"Apache-2.0",
+"description":"### Interesting Title\nSome application content, and description\n"
+}' http://localhost:8080/apps
+```
+
+##### Send yaml msg :
+```
+curl --data '---
+company: "Random Inc."
+description: |-
+    ### Interesting Title
+    Some application content, and description
+license: Apache-2.0
+maintainers: 
+  - 
+    email: firstmaintainer@hotmail.com
+    name: "firstmaintainer app1"
+  - 
+    email: secondmaintainer@gmail.com
+    name: "secondmaintainer app1"
+source: "https://github.com/random/repo"
+title: "Valid App 1"
+version: "123"
+website: https://website.com' http://localhost:8080/apps
+```
+
+##### Get json msg :
+```
+http://localhost:8080/apps/json/{id}
+```
+
+##### Get yaml msg :
+```
+http://localhost:8080/apps/yaml/{id}
+```
+
+##### Search example :
+```
+http://localhost:8080/apps/search/company=Random
+```
+

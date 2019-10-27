@@ -20,7 +20,8 @@ const (
 
 var (
 	// 1 operation per each connection
-	limiter = rate.NewLimiter(1, 1)
+	limiter       = rate.NewLimiter(1, 1)
+	requestedType = core.MediaTypeJSON
 )
 
 type appsController struct {
@@ -40,7 +41,7 @@ func (c appsController) Fetch(req core.Request) core.ResponseWriter {
 	if !limiter.Allow() {
 		return NewResponse(http.StatusTooManyRequests, core.MediaTypeJSON).Writer
 	}
-	id, ok := req.PathParam(pathParamID)
+	requestedType, id, ok := req.PathParam(pathParamID)
 	if !ok {
 		panic("did not receive required path parameter " + pathParamID)
 	}
@@ -53,9 +54,7 @@ func (c appsController) Fetch(req core.Request) core.ResponseWriter {
 		return NewResponse(http.StatusInternalServerError, core.MediaTypeJSON).Writer
 	}
 
-	/*TODO*/
-	//return NewResponse(http.StatusOK, core.MediaTypeYAML).Data(responseKeyApp, app).Writer
-	return NewResponse(http.StatusOK, core.MediaTypeJSON).Data(responseKeyApp, app).Writer
+	return NewResponse(http.StatusOK, requestedType).Data(responseKeyApp, app).Writer
 }
 
 // Search gets multiple app from storage and returns it
@@ -63,7 +62,7 @@ func (c appsController) Search(req core.Request) core.ResponseWriter {
 	if !limiter.Allow() {
 		return NewResponse(http.StatusTooManyRequests, core.MediaTypeJSON).Writer
 	}
-	id, ok := req.PathParam(pathParamID)
+	_, id, ok := req.PathParam(pathParamID)
 	if !ok {
 		panic("did not receive required path parameter " + pathParamID)
 	}

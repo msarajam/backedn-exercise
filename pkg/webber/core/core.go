@@ -21,7 +21,7 @@ type Handler func(r Request) ResponseWriter
 
 // Request is the struct that server uses to receive the request
 type Request interface {
-	PathParam(key string) (string, bool)
+	PathParam(key string) (string, string, bool)
 	Initialize(target interface{}) error
 	Header(key string) string
 }
