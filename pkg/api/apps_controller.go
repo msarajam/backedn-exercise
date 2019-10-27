@@ -18,7 +18,7 @@ const (
 	errorBadBody      = "invalid request body"
 )
 
-var(
+var (
 	// 1 operation per each connection
 	limiter = rate.NewLimiter(1, 1)
 )
@@ -55,7 +55,7 @@ func (c appsController) Fetch(req core.Request) core.ResponseWriter {
 
 	/*TODO*/
 	//return NewResponse(http.StatusOK, core.MediaTypeYAML).Data(responseKeyApp, app).Writer
-		return NewResponse(http.StatusOK, core.MediaTypeJSON).Data(responseKeyApp, app).Writer
+	return NewResponse(http.StatusOK, core.MediaTypeJSON).Data(responseKeyApp, app).Writer
 }
 
 // Search gets multiple app from storage and returns it

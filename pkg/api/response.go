@@ -8,12 +8,14 @@ import (
 	"net/http"
 )
 
+// Response is the structure of response msg
 type Response struct {
 	statusCode int
 	mediaType  string
 	data       map[string]interface{}
 }
 
+// NewResponse is for creating a new response
 func NewResponse(statusCode int, mediaType string) *Response {
 	return &Response{
 		statusCode: statusCode,
@@ -22,11 +24,13 @@ func NewResponse(statusCode int, mediaType string) *Response {
 	}
 }
 
+//Data is being use in the NewResponse for structuring the data
 func (r *Response) Data(key string, value interface{}) *Response {
 	r.data[key] = value
 	return r
 }
 
+// Writer is for writing the response
 func (r *Response) Writer(w http.ResponseWriter) {
 	// Write the header first (important!)
 	r.writeHeader(w)

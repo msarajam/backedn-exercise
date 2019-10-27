@@ -7,6 +7,7 @@ import (
 	"gopkg.in/go-playground/validator.v8"
 )
 
+// Serve is the starting point for the server , this is the place to manage the endpoints
 func Serve(listenAddress string, c *storage.Collection, v *validator.Validate) error {
 	s := webber.NewServer(listenAddress, core.MediaTypeJSON)
 	apps := newAppsController(c, v)

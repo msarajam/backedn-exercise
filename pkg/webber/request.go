@@ -9,11 +9,13 @@ import (
 	"net/http"
 )
 
+// BasicRequest is the request struct
 type BasicRequest struct {
 	httpRequest *http.Request
 	pathParams  map[string]string
 }
 
+// NewRequest is for creating new request
 func NewRequest(r *http.Request) *BasicRequest {
 	return &BasicRequest{
 		httpRequest: r,
@@ -21,10 +23,12 @@ func NewRequest(r *http.Request) *BasicRequest {
 	}
 }
 
+// Header to get the header from http request
 func (r *BasicRequest) Header(key string) string {
 	return r.httpRequest.Header.Get(key)
 }
 
+// PathParam is getting the request msg
 func (r *BasicRequest) PathParam(key string) (string, bool) {
 	v, ok := r.pathParams[key]
 	return v, ok
@@ -38,6 +42,7 @@ func yamlCheck(b []byte, target interface{}) error {
 	return yaml.Unmarshal([]byte(b), target)
 }
 
+// Initialize is for checking the json and yaml,
 func (r *BasicRequest) Initialize(target interface{}) error {
 	b, err := ioutil.ReadAll(r.httpRequest.Body)
 	if err != nil {

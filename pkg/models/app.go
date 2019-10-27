@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// App is the json structure that also being used for yaml and manages the data
 type App struct {
 	ID          string       `json:"id"`
 	Title       string       `json:"title" validate:"required"`
