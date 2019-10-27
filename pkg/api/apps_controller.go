@@ -1,7 +1,6 @@
 package api
 
 import (
-	"fmt"
 	"golang.org/x/time/rate"
 	"log"
 	"net/http"
@@ -39,7 +38,6 @@ func newAppsController(c *storage.Collection, v *validator.Validate) appsControl
 // Fetch gets a single app from storage and returns it
 func (c appsController) Fetch(req core.Request) core.ResponseWriter {
 	if limiter.Allow() == false {
-		fmt.Println("RateLimit")
 		return NewResponse(http.StatusTooManyRequests, core.MediaTypeJSON).Writer
 	}
 	id, ok := req.PathParam(pathParamID)
@@ -56,14 +54,13 @@ func (c appsController) Fetch(req core.Request) core.ResponseWriter {
 	}
 
 	/*TODO*/
-	return NewResponse(http.StatusOK, core.MediaTypeYAML).Data(responseKeyApp, app).Writer
-	//	return NewResponse(http.StatusOK, core.MediaTypeJSON).Data(responseKeyApp, app).Writer
+	//return NewResponse(http.StatusOK, core.MediaTypeYAML).Data(responseKeyApp, app).Writer
+		return NewResponse(http.StatusOK, core.MediaTypeJSON).Data(responseKeyApp, app).Writer
 }
 
 // Search gets multiple app from storage and returns it
 func (c appsController) Search(req core.Request) core.ResponseWriter {
 	if limiter.Allow() == false {
-		fmt.Println("RateLimit")
 		return NewResponse(http.StatusTooManyRequests, core.MediaTypeJSON).Writer
 	}
 	id, ok := req.PathParam(pathParamID)
@@ -75,7 +72,6 @@ func (c appsController) Search(req core.Request) core.ResponseWriter {
 		if err == storage.ErrNotFound {
 			return NewResponse(http.StatusNotFound, core.MediaTypeJSON).Writer
 		}
-		log.Println(err)
 		return NewResponse(http.StatusInternalServerError, core.MediaTypeJSON).Writer
 	}
 	return NewResponse(http.StatusOK, core.MediaTypeJSON).Data(responseKeyApp, app).Writer
@@ -84,7 +80,6 @@ func (c appsController) Search(req core.Request) core.ResponseWriter {
 // Create adds an app to storage and returns it with its unique identifier
 func (c appsController) Create(req core.Request) core.ResponseWriter {
 	if limiter.Allow() == false {
-		fmt.Println("RateLimit")
 		return NewResponse(http.StatusTooManyRequests, core.MediaTypeJSON).Writer
 	}
 	app := models.App{}
