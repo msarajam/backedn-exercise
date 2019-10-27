@@ -20,7 +20,7 @@ const (
 )
 
 var(
-	// operation user per connection
+	// 1 operation per each connection
 	limiter = rate.NewLimiter(1, 1)
 )
 
