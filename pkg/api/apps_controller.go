@@ -37,7 +37,7 @@ func newAppsController(c *storage.Collection, v *validator.Validate) appsControl
 
 // Fetch gets a single app from storage and returns it
 func (c appsController) Fetch(req core.Request) core.ResponseWriter {
-	if limiter.Allow() == false {
+	if !limiter.Allow() {
 		return NewResponse(http.StatusTooManyRequests, core.MediaTypeJSON).Writer
 	}
 	id, ok := req.PathParam(pathParamID)
@@ -60,7 +60,7 @@ func (c appsController) Fetch(req core.Request) core.ResponseWriter {
 
 // Search gets multiple app from storage and returns it
 func (c appsController) Search(req core.Request) core.ResponseWriter {
-	if limiter.Allow() == false {
+	if !limiter.Allow() {
 		return NewResponse(http.StatusTooManyRequests, core.MediaTypeJSON).Writer
 	}
 	id, ok := req.PathParam(pathParamID)
@@ -79,7 +79,7 @@ func (c appsController) Search(req core.Request) core.ResponseWriter {
 
 // Create adds an app to storage and returns it with its unique identifier
 func (c appsController) Create(req core.Request) core.ResponseWriter {
-	if limiter.Allow() == false {
+	if !limiter.Allow() {
 		return NewResponse(http.StatusTooManyRequests, core.MediaTypeJSON).Writer
 	}
 	app := models.App{}
