@@ -4,6 +4,7 @@ go 1.13
 
 require (
 	github.com/ghodss/yaml v1.0.0
+	github.com/gojp/goreportcard v0.0.0-20191001233754-41818f5fd295 // indirect
 	github.com/golang/mock v1.3.1-0.20190508161146-9fa652df1129
 	github.com/gorilla/mux v1.7.2
 	github.com/onsi/gomega v1.5.0
