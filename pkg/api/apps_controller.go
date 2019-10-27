@@ -49,6 +49,23 @@ func (c appsController) Fetch(req core.Request) core.ResponseWriter {
 	//	return NewResponse(http.StatusOK, core.MediaTypeJSON).Data(responseKeyApp, app).Writer
 }
 
+// Search gets multiple app from storage and returns it
+func (c appsController) Search(req core.Request) core.ResponseWriter {
+	id, ok := req.PathParam(pathParamID)
+	if !ok {
+		panic("did not receive required path parameter " + pathParamID)
+	}
+	app, err := c.collection.Search(id)
+	if err != nil {
+		if err == storage.ErrNotFound {
+			return NewResponse(http.StatusNotFound, core.MediaTypeJSON).Writer
+		}
+		log.Println(err)
+		return NewResponse(http.StatusInternalServerError, core.MediaTypeJSON).Writer
+	}
+	return NewResponse(http.StatusOK, core.MediaTypeJSON).Data(responseKeyApp, app).Writer
+}
+
 // Create adds an app to storage and returns it with its unique identifier
 func (c appsController) Create(req core.Request) core.ResponseWriter {
 	app := models.App{}

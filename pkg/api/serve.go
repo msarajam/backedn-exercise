@@ -14,6 +14,6 @@ func Serve(listenAddress string, c *storage.Collection, v *validator.Validate) e
 	s.POST("/apps", apps.Create)
 	s.GET("/apps/json/{id}", apps.Fetch)
 	s.GET("/apps/yaml/{id}", apps.Fetch)
-
+	s.GET("/apps/search/{id}", apps.Search)
 	return s.Serve()
 }
