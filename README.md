@@ -158,4 +158,8 @@ http://localhost:8080/apps/yaml/{id}
 ```
 http://localhost:8080/apps/search/company=Random
 ```
+for maintainers (email , name )
 
+```
+http://localhost:8080/apps/search/maintainers=Random
+```
