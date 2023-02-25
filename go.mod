@@ -10,7 +10,7 @@ require (
 	github.com/onsi/gomega v1.5.0
 	github.com/satori/go.uuid v1.2.0
 	golang.org/x/net v0.0.0-20190606173856-1492cefac77f // indirect
-	golang.org/x/sys v0.0.0-20191026070338-33540a1f6037 // indirect
+	golang.org/x/sys v0.1.0 // indirect
 	golang.org/x/text v0.3.2 // indirect
 	golang.org/x/time v0.0.0-20191024005414-555d28b269f0
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
